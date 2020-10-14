@@ -15,7 +15,7 @@ jobs:
   # This workflow contains a single job called "build"
   GetFlaws:
     # The type of runner that the job will run on
-    runs-on: ctcampbellcom/veracode-tools
+    runs-on: ubuntu-latest
     env: 
       VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
       VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
