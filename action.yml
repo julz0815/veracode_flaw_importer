@@ -6,10 +6,10 @@ inputs:
     required: true
   vid:
     description: 'The Veracode API ID'
-    required: true
+    required: false
   vkey:
     description: 'The Veracode API Key'
-    required: true
+    required: false
   scantype:  
     description: 'the type of scan'
     required: false
