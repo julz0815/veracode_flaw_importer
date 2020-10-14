@@ -2,7 +2,7 @@
 
 chmod 777 /jq-linux64
 export VERACODE_API_KEY_ID=$5
-export VERACODE_API_KEY_ID=$6
+export VERACODE_API_KEY_SECRET=$6
 env
 
 #required parameters
