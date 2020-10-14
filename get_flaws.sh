@@ -2,8 +2,8 @@
 
 #required parameters
 appguid=$1
-vid=$5
-vkey=$6
+echo "vid: vid=$5"
+echo "vkey vkey=$6"
 
 
 #optional parameters
@@ -13,8 +13,8 @@ includeannotations=$4
 
 #inital tasks
 chmod 777 /jq-linux64
-#export VERACODE_API_KEY_ID=$vkey
-#export VERACODE_API_KEY_SECRET=$vid
+echo $(export VERACODE_API_KEY_ID=$vkey)
+echo $(export VERACODE_API_KEY_SECRET=$vid)
 env
 
 
