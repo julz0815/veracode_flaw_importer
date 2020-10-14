@@ -1,18 +1,21 @@
 #!/bin/sh -l
 
-chmod 777 /jq-linux64
-export VERACODE_API_KEY_ID=$5
-export VERACODE_API_KEY_SECRET=$6
-env
-
 #required parameters
 appguid=$1
+vid=$5
+vkey=$6
 
 
 #optional parameters
 scantype=$2
 importtype=$3
 includeannotations=$4
+
+#inital tasks
+chmod 777 /jq-linux64
+export VERACODE_API_KEY_ID=$vkey
+export VERACODE_API_KEY_SECRET=$vid
+env
 
 
 #
