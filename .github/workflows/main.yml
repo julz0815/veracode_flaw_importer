@@ -32,3 +32,6 @@ jobs:
       id: get_flaws  
       with:
         guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
+    - uses: actions/upload-artifact@master
+        name: flaws
+        path: /home/runner/work/veracode_flaw_importer/veracode_flaw_importer/fullResults.json
