@@ -4,7 +4,6 @@ inputs:
   guid:
     description: 'The Application API GUID'
     required: true
-    default: '${{ github.repository }}'
   scantype:  
     description: 'the type of scan'
     required: false
