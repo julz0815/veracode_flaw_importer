@@ -13,8 +13,8 @@ includeannotations=$4
 
 #inital tasks
 chmod 777 /jq-linux64
-export VERACODE_API_KEY_ID=$vkey
-export VERACODE_API_KEY_SECRET=$vid
+#export VERACODE_API_KEY_ID=$vkey
+#export VERACODE_API_KEY_SECRET=$vid
 env
 
 
