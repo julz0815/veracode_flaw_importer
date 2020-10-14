@@ -25,9 +25,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Getflaws
-      uses: ./ # Uses an action in the root directory
+    - uses: ./ # Uses an action in the root directory
+      env: 
+        VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
+        VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
       id: get_flaws  
-    - run: /get_flaws.sh
       with:
         guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
         vid: '${{ secrets.VERACODE_API_ID }}'
