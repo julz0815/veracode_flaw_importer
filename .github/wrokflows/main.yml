@@ -24,13 +24,10 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - uses: actions/setup-java@v1
-      with: 
-        java-version: '8'
     - name: Getflaws
       uses: ./ # Uses an action in the root directory
       id: get_flaws  
-      run: /get_flaws.sh
+    - run: /get_flaws.sh
       with:
         guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
         vid: '${{ secrets.VERACODE_API_ID }}'
