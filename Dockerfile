@@ -7,4 +7,4 @@ FROM openjdk:latest
 COPY get_flaws.sh /get_flaws.sh
 
 # Code file to execute when the docker container starts up (`get_flaws.sh`)
-ENTRYPOINT ["/get_flaws.sh"]
+ENTRYPOINT ["bash","/get_flaws.sh"]
