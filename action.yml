@@ -4,13 +4,6 @@ inputs:
   guid:
     description: 'The Application API GUID'
     required: true
-  vid:
-    description: 'The Veracode API ID'
-    required: true
-  vkey:
-    description: 'The Veracode API Key'
-    required: true
-  scantype:  
     description: 'the type of scan'
     required: false
     default: 'STATIC'
@@ -30,5 +23,3 @@ runs:
     - ${{ inputs.scantype }}
     - ${{ inputs.importtype }}
     - ${{ inputs.includeannotations }}
-    - ${{ inputs.vid }}
-    - ${{ inputs.vkey }}
