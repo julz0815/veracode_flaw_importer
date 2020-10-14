@@ -26,3 +26,5 @@ jobs:
       id: get_flaws
       with:
         guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
+        vid: '${{ secrets.VERACODE_API_ID }}'
+        vkey: '${{ secrets.VERACODE_API_KEY }}'
