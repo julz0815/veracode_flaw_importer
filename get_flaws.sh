@@ -19,7 +19,7 @@ chmod 777 /jq-linux64
 # optional ( includeannotations ) 
 #
 
-$(http --help)
+echo $(http --help)
 echo "http --auth-type veracode_hmac https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500"
 $(echo "http --auth-type veracode_hmac https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
 #$(echo "http --auth-type veracode_hmac --output findings.json https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
