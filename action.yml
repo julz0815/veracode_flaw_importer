@@ -4,6 +4,7 @@ inputs:
   guid:
     description: 'The Application API GUID'
     required: true
+  scantype:
     description: 'the type of scan'
     required: false
     default: 'STATIC'
