@@ -6,4 +6,4 @@ Import static findings to Github Security
 # importtype (cwe || scantype || sandbox || severity || severityhigher || category || latestscan || violates_policy)
 # optional ( includeannotations ) 
 #
-test
+test test
