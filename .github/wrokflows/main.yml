@@ -30,7 +30,7 @@ jobs:
     - name: Getflaws
       uses: ./ # Uses an action in the root directory
       id: get_flaws  
-
+      run: /get_flaws.sh
       with:
         guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
         vid: '${{ secrets.VERACODE_API_ID }}'
