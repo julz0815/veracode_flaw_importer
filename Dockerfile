@@ -1,7 +1,7 @@
 # Container image that runs your code
-FROM openjdk:latest
+FROM ctcampbellcom/veracode-tools
     
-RUN yum install httpie
+#RUN yum install httpie
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY get_flaws.sh /get_flaws.sh
