@@ -6,10 +6,10 @@ inputs:
     required: true
   vid:
     description: 'The Veracode API ID'
-    required: false
+    required: true
   vkey:
     description: 'The Veracode API Key'
-    required: false
+    required: true
   scantype:  
     description: 'the type of scan'
     required: false
@@ -30,3 +30,5 @@ runs:
     - ${{ inputs.scantype }}
     - ${{ inputs.importtype }}
     - ${{ inputs.includeannotations }}
+    - ${{ inputs.vid }}
+    - ${{ inputs.vkey }}

@@ -26,9 +26,8 @@ jobs:
         java-version: '8'
     - name: Getflaws
       uses: ./ # Uses an action in the root directory
-      id: get_flaws
-      env:
-        VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
-        VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
+      id: get_flaws  
       with:
         guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
+        vid: '${{ secrets.VERACODE_API_ID }}'
+        vkey: '${{ secrets.VERACODE_API_KEY }}'
