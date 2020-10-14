@@ -1,6 +1,7 @@
 #!/bin/sh -l
 
 chmod 777 /jq-linux64
+env
 
 #required parameters
 appguid=$1
