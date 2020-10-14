@@ -1,5 +1,7 @@
 #!/bin/sh -l
 
+chmod 777 /jq-linux64
+
 #required parameters
 appguid=$1
 
@@ -17,7 +19,7 @@ includeannotations=$4
 #
 
 $(echo "http --auth-type veracode_hmac --output findings.json https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
-findingsnumber=$(cat findings.json | ./jq  -r '._embedded.findings' | ./jq length)
+findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq-linux64 length)
 echo "Number of findings found: $findingsnumber"
 
 
@@ -37,7 +39,7 @@ version : \"2.1.0\",
 i=0
 while [  $i -lt $findingsnumber ]; do
             #echo "Finding #$i"
-            #echo $(cat findings.json | ./jq  ._embedded.findings[$i])
+            #echo $(cat findings.json | /jq-linux64  ._embedded.findings[$i])
             #echo "\\n\\n"
             
           
@@ -62,16 +64,16 @@ while [  $i -lt $findingsnumber ]; do
 #                "precision": "very-high"
 #              }
 
-            cwe=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.cwe.id | sed 's/"//g')
-            cwename=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.cwe.name| sed 's/"//g')
-            guid=$(cat findings.json | ./jq  ._embedded.findings[$i].context_guid| sed 's/"//g')
-            issueid=$(cat findings.json | ./jq  ._embedded.findings[$i].issue_id| sed 's/"//g')
-            description=$(cat findings.json | ./jq  ._embedded.findings[$i].description| sed 's/"//g')
-            severity=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.severity| sed 's/"//g')
-            filepath=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.file_path| sed 's/"//g')
-            modulename=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.module| sed 's/"//g')
-            procedure=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
-            lineofcode=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.file_line_numbern| sed 's/"//g')
+            cwe=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.cwe.id | sed 's/"//g')
+            cwename=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.cwe.name| sed 's/"//g')
+            guid=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].context_guid| sed 's/"//g')
+            issueid=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].issue_id| sed 's/"//g')
+            description=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].description| sed 's/"//g')
+            severity=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.severity| sed 's/"//g')
+            filepath=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.file_path| sed 's/"//g')
+            modulename=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.module| sed 's/"//g')
+            procedure=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
+            lineofcode=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.file_line_numbern| sed 's/"//g')
 
             echo "
             {
