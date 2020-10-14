@@ -19,7 +19,8 @@ chmod 777 /jq-linux64
 # optional ( includeannotations ) 
 #
 
-echo $(echo "http --auth-type veracode_hmac --output findings.json https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
+http --auth-type veracode_hmac https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500"
+#$(echo "http --auth-type veracode_hmac --output findings.json https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
 findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq-linux64 length)
 echo "Findings file:"
 cat findings.json
