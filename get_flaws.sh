@@ -2,8 +2,6 @@
 
 #required parameters
 appguid=$1
-echo "vid: vid=$5"
-echo "vkey vkey=$6"
 
 
 #optional parameters
@@ -13,10 +11,6 @@ includeannotations=$4
 
 #inital tasks
 chmod 777 /jq-linux64
-#export $(cat /run/secrets/.env | xargs)
-#echo $(export VERACODE_API_KEY_ID=$vkey)
-#echo $(export VERACODE_API_KEY_SECRET=$vid)
-env
 
 
 #
@@ -25,8 +19,10 @@ env
 # optional ( includeannotations ) 
 #
 
-$(echo "http --auth-type veracode_hmac --output findings.json https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
+echo $(echo "http --auth-type veracode_hmac --output findings.json https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
 findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq-linux64 length)
+echo "Findings file:"
+cat findings.json
 echo "Number of findings found: $findingsnumber"
 
 
