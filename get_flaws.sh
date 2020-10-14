@@ -26,6 +26,7 @@ echo "Number of findings found: $findingsnumber"
 
   #Start construct SARIF
 echo "
+{
 \$schema : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
 version : \"2.1.0\",
     runs : [
@@ -171,6 +172,7 @@ cat sarif.json > fullResults.json
 cat rules.json >> fullResults.json
 cat results.json >> fullResults.json
 #close runs tag
-echo "            ]" >> fullResults.json
+echo "            ]
+}" >> fullResults.json
 
 cat fullResults.json
