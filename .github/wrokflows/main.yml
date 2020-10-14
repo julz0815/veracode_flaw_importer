@@ -16,6 +16,9 @@ jobs:
   GetFlaws:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env: 
+      VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
+      VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,9 +30,7 @@ jobs:
     - name: Getflaws
       uses: ./ # Uses an action in the root directory
       id: get_flaws  
-      env: 
-        VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
-        VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
+
       with:
         guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
         vid: '${{ secrets.VERACODE_API_ID }}'
