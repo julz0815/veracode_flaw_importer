@@ -114,7 +114,7 @@ while [  $i -lt $findingsnumber ]; do
                 echo "
                     ]
                 }
-            },"
+            }," >> rules.json
             fi
 
             #Add results
