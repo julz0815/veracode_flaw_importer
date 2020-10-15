@@ -96,7 +96,7 @@ while [  $i -lt $findingsnumber ]; do
                             \"category\": \"CWE: $cwe $cwename\",
                             \"tags\": [
                             \"CWE: $cwe $cwename\"
-                            ]
+                            ],
                         }
                     }
             " >> rules.json
