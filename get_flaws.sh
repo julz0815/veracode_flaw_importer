@@ -26,21 +26,22 @@ echo "Number of findings found: $findingsnumber"
 
   #Start construct SARIF
 echo "
-$schema : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
-version : \"2.1.0\",
-    runs : [
+{
+\”\”$schema\” : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
+\"version\" : \"2.1.0\",
+    \"runs\" : [
             {
-            tool : {
-                driver : {
-                    name : \"Veracode Static Analysis Pipeline Scan\",
-                    rules: [" > sarif.json
+            \"tool\" : {
+                \"driver\" : {
+                    \"name\" : \"Veracode Static Analysis Pipeline Scan\",
+                    \"rules\" : [" > sarif.json
 
 
 
 i=0
 while [  $i -lt $findingsnumber ]; do
             #echo "Finding #$i"
-            #echo $(cat findings.json | ./jq  ._embedded.findings[$i])
+            #echo $(cat findings.json | /jq-linux64 ._embedded.findings[$i])
             #echo "\\n\\n"
             
           
