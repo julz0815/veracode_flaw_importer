@@ -105,7 +105,7 @@ while [  $i -lt $findingsnumber ]; do
             then
                 echo "
                 ," >> rules.json
-            elif
+            else
                 echo "
                     ]
                 }
@@ -166,7 +166,7 @@ while [  $i -lt $findingsnumber ]; do
             if [  $i -lt $findingsnumber ]
             then
                 echo "," >> results.json
-            elif
+            else
                 echo ""
             fi
     let i=i+1 
