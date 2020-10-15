@@ -72,7 +72,7 @@ while [  $i -lt $findingsnumber ]; do
             cwename=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.cwe.name| sed 's/"//g')
             guid=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].context_guid| sed 's/"//g')
             issueid=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].issue_id| sed 's/"//g')
-            description=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].description| sed 's/"//g' | sed -e 's/<[^>]*>//g')
+            description=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].description| sed 's/"//g' | sed -e 's/<[^>]*>//g' | sed 's/\\//g')
             severity=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.severity| sed 's/"//g')
             filepath=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_path| sed 's/"//g')
             modulename=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.module| sed 's/"//g')
@@ -114,7 +114,7 @@ while [  $i -lt $findingsnumber ]; do
                 echo "
                     ]
                 }
-            },"
+            }," >> rules.json
             fi
 
             #Add results
