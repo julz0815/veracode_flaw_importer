@@ -96,7 +96,7 @@ while [  $i -lt $findingsnumber ]; do
                             \"category\": \"CWE: $cwe $cwename\",
                             \"tags\": [
                             \"CWE: $cwe $cwename\"
-                            ],
+                            ]
                         }
                     }
             " >> rules.json
@@ -105,9 +105,11 @@ while [  $i -lt $findingsnumber ]; do
             #if more rules add ,
             if [  $i -lt $findingsnumber ]
             then
+                echo "$i - just a comma"
                 echo "
                 ," >> rules.json
             else
+                echo "$i - close the tags"
                 echo "
                     ]
                 }
@@ -167,8 +169,10 @@ while [  $i -lt $findingsnumber ]; do
             #if more results add ,
             if [  $i -lt $findingsnumber ]
             then
+                echo "$i - just a comma"
                 echo "," >> results.json
             else
+                echo "$i - close tags"
                 echo ""
             fi
     let i=i+1 
@@ -179,7 +183,7 @@ done
 #create full file
 cat sarif.json > fullResults.json
 cat rules.json >> fullResults.json
-echo "      "results": [" >> fullResults.json
+echo "      \"results\": [" >> fullResults.json
 cat results.json >> fullResults.json
 #close runs tag
 echo "
