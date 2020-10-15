@@ -44,7 +44,8 @@ while [  $i -lt $findingsnumber ]; do
             #echo "Finding #$i"
             #echo $(cat findings.json | /jq-linux64 ._embedded.findings[$i])
             #echo "\\n\\n"
-            
+            #use findingsnumber internaly
+            number=$findingsnumber-1
           
             
             #Add rules
@@ -103,7 +104,7 @@ while [  $i -lt $findingsnumber ]; do
 
 
             #if more rules add ,
-            if [  $i -lt $findingsnumber ]
+            if [  $i -lt $number ]
             then
                 echo "$i - just a comma"
                 echo "
@@ -167,7 +168,7 @@ while [  $i -lt $findingsnumber ]; do
         }" >> results.json
             
             #if more results add ,
-            if [  $i -lt $findingsnumber ]
+            if [  $i -lt $number ]
             then
                 echo "$i - just a comma"
                 echo "," >> results.json
