@@ -77,7 +77,7 @@ while [  $i -lt $findingsnumber ]; do
             filepath=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_path| sed 's/"//g')
             modulename=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.module| sed 's/"//g')
             procedure=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
-            lineofcode=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_line_numbern| sed 's/"//g')
+            lineofcode=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_line_number| sed 's/"//g')
 
             echo "
                     {
@@ -188,6 +188,7 @@ echo "      \"results\": [" >> fullResults.json
 cat results.json >> fullResults.json
 #close runs tag
 echo "
+      ]
     }
   ]
 }" >> fullResults.json
