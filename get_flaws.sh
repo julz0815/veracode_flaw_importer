@@ -26,22 +26,21 @@ echo "Number of findings found: $findingsnumber"
 
   #Start construct SARIF
 echo "
-{
-\$schema : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
+$schema : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
 version : \"2.1.0\",
     runs : [
             {
             tool : {
                 driver : {
                     name : \"Veracode Static Analysis Pipeline Scan\",
-                    rules:" > sarif.json
+                    rules: [" > sarif.json
 
 
 
 i=0
 while [  $i -lt $findingsnumber ]; do
             #echo "Finding #$i"
-            #echo $(cat findings.json | /jq-linux64  ._embedded.findings[$i])
+            #echo $(cat findings.json | ./jq  ._embedded.findings[$i])
             #echo "\\n\\n"
             
           
@@ -66,45 +65,51 @@ while [  $i -lt $findingsnumber ]; do
 #                "precision": "very-high"
 #              }
 
-            cwe=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.cwe.id | sed 's/"//g')
-            cwename=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.cwe.name| sed 's/"//g')
-            guid=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].context_guid| sed 's/"//g')
-            issueid=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].issue_id| sed 's/"//g')
-            description=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].description| sed 's/"//g')
-            severity=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.severity| sed 's/"//g')
-            filepath=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.file_path| sed 's/"//g')
-            modulename=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.module| sed 's/"//g')
-            procedure=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
-            lineofcode=$(cat findings.json | /jq-linux64  ._embedded.findings[$i].finding_details.file_line_numbern| sed 's/"//g')
+            cwe=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.cwe.id | sed 's/"//g')
+            cwename=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.cwe.name| sed 's/"//g')
+            guid=$(cat findings.json | ./jq  ._embedded.findings[$i].context_guid| sed 's/"//g')
+            issueid=$(cat findings.json | ./jq  ._embedded.findings[$i].issue_id| sed 's/"//g')
+            description=$(cat findings.json | ./jq  ._embedded.findings[$i].description| sed 's/"//g')
+            severity=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.severity| sed 's/"//g')
+            filepath=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.file_path| sed 's/"//g')
+            modulename=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.module| sed 's/"//g')
+            procedure=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
+            lineofcode=$(cat findings.json | ./jq  ._embedded.findings[$i].finding_details.file_line_numbern| sed 's/"//g')
 
             echo "
-            {
-              \"id\": \"$guid - $issueid\",
-              \"name\": \"CWE: $cwe $cwename\",
-              \"shortDescription\": {
-                \"text\": \"$cwename\"
-              },
-              \"fullDescription\": {
-                \"text\": \"$description\"
-              },
-              \"helpUri\": \"https://cwe.mitre.org/data/definitions/$cwe.html\",
-              \"defaultConfiguration\": {
-                \"level\": \"$severity\"
-              },
-              \"properties\": {
-                \"category\": \"CWE: $cwe $cwename\",
-                \"tags\": [
-                  \"CWE: $cwe $cwename\"
-                ]
-              }
-            }
+                    {
+                        \"id\": \"$guid - $issueid\",
+                        \"name\": \"CWE: $cwe $cwename\",
+                        \"shortDescription\": {
+                            \"text\": \"$cwename\"
+                        },
+                        \"fullDescription\": {
+                            \"text\": \"$description\"
+                        },
+                        \"helpUri\": \"https://cwe.mitre.org/data/definitions/$cwe.html\",
+                        \"defaultConfiguration\": {
+                            \"level\": \"$severity\"
+                        },
+                        \"properties\": {
+                            \"category\": \"CWE: $cwe $cwename\",
+                            \"tags\": [
+                            \"CWE: $cwe $cwename\"
+                            ]
+                        }
+                    }
             " >> rules.json
 
 
             #if more rules add ,
             if [  $i -lt $findingsnumber ]
             then
-                echo "," >> rules.json
+                echo "
+                ," >> rules.json
+            elif
+                echo "
+                    ]
+                }
+            },"
             fi
 
             #Add results
@@ -161,6 +166,8 @@ while [  $i -lt $findingsnumber ]; do
             if [  $i -lt $findingsnumber ]
             then
                 echo "," >> results.json
+            elif
+                echo ""
             fi
     let i=i+1 
 done
@@ -170,9 +177,12 @@ done
 #create full file
 cat sarif.json > fullResults.json
 cat rules.json >> fullResults.json
+echo "      "results": [" >> fullResults.json
 cat results.json >> fullResults.json
 #close runs tag
-echo "            ]
+echo "
+    }
+  ]
 }" >> fullResults.json
 
 cat fullResults.json
