@@ -45,7 +45,7 @@ while [  $i -lt $findingsnumber ]; do
             #echo $(cat findings.json | /jq-linux64 ._embedded.findings[$i])
             #echo "\\n\\n"
             #use findingsnumber internaly
-            number=$findingsnumber-1
+            let number=$findingsnumber-1
           
             
             #Add rules
