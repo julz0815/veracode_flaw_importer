@@ -24,16 +24,17 @@ findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq
 echo "Number of findings found: $findingsnumber"
 
 
+
   #Start construct SARIF
 echo "
 {
-\”\$schema\” : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
+\"\$schema\" : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
 \"version\" : \"2.1.0\",
     \"runs\" : [
             {
             \"tool\" : {
                 \"driver\" : {
-                    \"name\" : \"Veracode Static Analysis Pipeline Scan\",
+                    \"name\" : \"Veracode Static Analysis Scan\",
                     \"rules\" : [" > sarif.json
 
 
