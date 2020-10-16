@@ -103,9 +103,9 @@ while [  $i -lt $findingsnumber ]; do
                         \"properties\": {
                             \"category\": \"CWE: $cwe $cwename\",
                             \"tags\": [
-                            \"CWE: $cwe $cwename\"
-                            \"module: $modulename\"
-                            \"filepath: $filepath\"
+                            \"CWE: $cwe $cwename\",
+                            \"module: $modulename\",
+                            \"filepath: $filepath\",
                             \"function: $procedure\"
                             ]
                         }
