@@ -116,11 +116,9 @@ while [  $i -lt $findingsnumber ]; do
             #if more rules add ,
             if [  $i -lt $number ]
             then
-                echo "$i - just a comma"
                 echo "
                 ," >> rules.json
             else
-                echo "$i - close the tags"
                 echo "
                     ]
                 }
@@ -180,11 +178,7 @@ while [  $i -lt $findingsnumber ]; do
             #if more results add ,
             if [  $i -lt $number ]
             then
-                echo "$i - just a comma"
                 echo "," >> results.json
-            else
-                echo "$i - close tags"
-                echo ""
             fi
             
     else
