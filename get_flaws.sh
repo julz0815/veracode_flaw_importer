@@ -49,9 +49,9 @@ while [  $i -lt $findingsnumber ]; do
             #echo "\\n\\n"
             #use findingsnumber internaly
             let number=$findingsnumber-1
-            open=$(cat findings.json | /jq-linux64  -r '._embedded.findings.inding_status.status')
+            open=$(cat findings.json | /jq-linux64  -r '._embedded.findings.finding_status.status')
             
-            if [ $open == "OPEN" || $open == "REOPENED" ]
+            if [ $open = "OPEN" || $open = "REOPENED" ]
             then
           
             
