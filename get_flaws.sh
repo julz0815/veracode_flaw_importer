@@ -5,9 +5,10 @@ appguid=$1
 
 
 #optional parameters
-scantype=$2
+scantype=$2 ## default is STATIC, nothing else yet implemented
 importtype=$3
 includeannotations=$4
+sandboxguid=$5
 
 #inital tasks
 chmod 777 /jq-linux64
@@ -18,8 +19,10 @@ chmod 777 /jq-linux64
 # importtype (cwe || scantype || sandbox || severity || severityhigher || category || latestscan || violates_policy)
 # optional ( includeannotations ) 
 #
+# context=<sandbox-guid>"
+#
 
-$(echo "http --auth-type veracode_hmac --output findings.json GET https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500")
+$(echo "http --auth-type veracode_hmac --output findings.json GET https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500&scantype=STATIC")
 findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq-linux64 length)
 echo "Number of findings found: $findingsnumber"
 
@@ -46,6 +49,10 @@ while [  $i -lt $findingsnumber ]; do
             #echo "\\n\\n"
             #use findingsnumber internaly
             let number=$findingsnumber-1
+            open=$(cat findings.json | /jq-linux64  -r '._embedded.findings.inding_status.status')
+            
+            if [ $open == "OPEN" || $open == "REOPENED" ]
+            then
           
             
             #Add rules
@@ -91,7 +98,7 @@ while [  $i -lt $findingsnumber ]; do
                         },
                         \"helpUri\": \"https://cwe.mitre.org/data/definitions/$cwe.html\",
                         \"defaultConfiguration\": {
-                            \"level\": \"$severity\"
+                            \"level\": \"error\"
                         },
                         \"properties\": {
                             \"category\": \"CWE: $cwe $cwename\",
@@ -176,6 +183,10 @@ while [  $i -lt $findingsnumber ]; do
                 echo "$i - close tags"
                 echo ""
             fi
+            
+    else
+      echo "Finding #$i is a closed/mitigated finding and will not be imported"
+    fi
     let i=i+1 
 done
 
