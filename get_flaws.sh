@@ -104,6 +104,9 @@ while [  $i -lt $findingsnumber ]; do
                             \"category\": \"CWE: $cwe $cwename\",
                             \"tags\": [
                             \"CWE: $cwe $cwename\"
+                            \"module: $modulename\"
+                            \"filepath: $filepath\"
+                            \"function: $procedure\"
                             ]
                         }
                     }
@@ -163,7 +166,7 @@ while [  $i -lt $findingsnumber ]; do
             {
               \"physicalLocation\": {
                 \"artifactLocation\": {
-                  \"uri\": \"$modulename - $filepath - $procedure\",
+                  \"uri\": \"$filepath\",
                   \"uriBaseId\": \"%SRCROOT%\"
                 },
                 \"region\": {
