@@ -1,21 +1,26 @@
 name: 'Veracode Static scanning flaw importer'
 description: 'Download static scan findings and create GitHub Security issues'
 inputs:
-  guid:
-    description: 'The Application API GUID'
+  app_name:
+    description: 'The application's name'
     required: true
+  app_guid:
+    description: 'The application's API GUID'
+    required: false
+  sandbox_name:
+    description: 'The sandboxname'
+    required: false
+  sandbox_guid:
+    description: "The sandbox guid'
+    required: false
   scantype:
     description: 'the type of scan'
     required: false
     default: 'STATIC'
-  importtype:  
-    description: 'What to import'
-    required: false
   includeannotations:  
     description: 'Include annotations'
     required: false
   
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
