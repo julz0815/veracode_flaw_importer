@@ -2,10 +2,10 @@ name: 'Veracode Static scanning flaw importer'
 description: 'Download static scan findings and create GitHub Security issues'
 inputs:
   app_name:
-    description: 'The application's name'
+    description: 'The applications name'
     required: true
   app_guid:
-    description: 'The application's API GUID'
+    description: 'The applications API GUID'
     required: false
   sandbox_name:
     description: 'The sandboxname'
