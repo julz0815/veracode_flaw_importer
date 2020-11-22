@@ -245,7 +245,8 @@ while [  $i -lt $findingsnumber ]; do
       echo "Finding #$i is a closed/mitigated finding and will not be imported"
     fi
     
-    #if no more rules/results, close tag 
+    #if no more rules/results, close tag
+    echo "run $i - $findingsnumber - $number"
     if [  $i -eq $findingsnumber ]
     then
       echo "$number - $i - NO more"
