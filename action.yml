@@ -25,7 +25,9 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.guid }}
+    - ${{ inputs.app_name }}
+    - ${{ inputs.app_guid }}
+    - ${{ inputs.sandbox_name }}
+    - ${{ inputs.sandbox_guid }}
     - ${{ inputs.scantype }}
-    - ${{ inputs.importtype }}
     - ${{ inputs.includeannotations }}
