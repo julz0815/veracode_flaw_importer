@@ -11,7 +11,7 @@ inputs:
     description: 'The sandboxname'
     required: false
   sandbox_guid:
-    description: "The sandbox guid'
+    description: 'The sandbox guid'
     required: false
   scantype:
     description: 'the type of scan'
@@ -25,7 +25,9 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.guid }}
+    - ${{ inputs.app_name }}
+    - ${{ inputs.app_guid }}
+    - ${{ inputs.sandbox_name }}
+    - ${{ inputs.sandbox_guid }}
     - ${{ inputs.scantype }}
-    - ${{ inputs.importtype }}
     - ${{ inputs.includeannotations }}
