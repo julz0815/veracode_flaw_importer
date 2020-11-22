@@ -247,7 +247,7 @@ while [  $i -lt $findingsnumber ]; do
     
     #if no more rules/results, close tag
     echo "run $i - $findingsnumber - $number"
-    if [  $i -eq $findingsnumber ]
+    if [  $i -eq $number ]
     then
       echo "$number - $i - NO more"
       echo "
