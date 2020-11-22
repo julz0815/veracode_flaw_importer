@@ -231,19 +231,23 @@ while [  $i -lt $findingsnumber ]; do
             }
           ]
         }" >> results.json
-            
+          
+        #if more rules/results, add a ","
+        if [  $i -lt $findingsnumber ]
+        then
+          echo "$number - $i - one more"
+          echo "
+          ," >> rules.json
+          echo "," >> results.json
+        fi
+          
     else
       echo "Finding #$i is a closed/mitigated finding and will not be imported"
     fi
     
-    #if more rules/results to add ,
-    if [  $i -lt $findingsnumber ]
+    #if no more rules/results, close tag 
+    if [  $i -eq $findingsnumber ]
     then
-      echo "$number - $i - one more"
-      echo "
-      ," >> rules.json
-      echo "," >> results.json
-    else
       echo "$number - $i - NO more"
       echo "
       ]," >> rules.json
