@@ -230,7 +230,7 @@ while [  $i -lt $findingsnumber ]; do
           
         #if more rules/results, add a ","
         let second_last=$number-1
-        if [  $i -lt $second_last ]
+        if [  $i -le $second_last ]
         then
           echo "$i - $number - not the last"
           echo "
@@ -253,9 +253,9 @@ while [  $i -lt $findingsnumber ]; do
     fi
     
     #if no more rules/results, close tag
-    echo "run $i - $findingsnumber - $number"
     if [  $i -eq $number ]
     then
+      echo "closing tags" 
       echo "
           ]
         }
