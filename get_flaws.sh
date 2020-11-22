@@ -13,7 +13,7 @@ scantype=$4
 includeannotations=$5
 
 #inital tasks
-chmod 777 /jq-linux64
+sudo chmod 777 /jq-linux64
 
 if [ -z $appguid ]
 then
