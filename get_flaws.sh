@@ -182,20 +182,6 @@ while [  $i -lt $findingsnumber ]; do
                     }
             " >> rules.json
 
-
-            #if more rules add ,
-            if [  $i -lt $number ]
-            then
-                echo "$number - $i - one more rule"
-                echo "
-                ," >> rules.json
-            elif [ $i -eq $number ]
-            then
-                echo "$number - $i - NO more rule"
-                echo "
-                ]," >> rules.json            
-            fi
-
             #Add results
 #        {
 #          "ruleId": "3f292041e51d22005ce48f39df3585d44ce1b0ad",
@@ -246,20 +232,25 @@ while [  $i -lt $findingsnumber ]; do
           ]
         }" >> results.json
             
-            #if more results add ,
-            if [ $i -lt $number ]
-            then
-                echo "$number - $i - one more results"
-                echo "," >> results.json
-            elif [ $i -eq $number ]
-            then
-                echo "$number - $i - NO more results"
-                echo "]," >> results.json
-            fi
-            
     else
       echo "Finding #$i is a closed/mitigated finding and will not be imported"
     fi
+    
+    #if more rules/results to add ,
+    if [  $i -lt $findingsnumber ]
+    then
+      echo "$number - $i - one more"
+      echo "
+      ," >> rules.json
+      echo "," >> results.json
+    else
+      echo "$number - $i - NO more"
+      echo "
+      ]," >> rules.json
+      echo "]," >> results.json
+    fi
+    
+    
     let i=i+1 
 done
 
