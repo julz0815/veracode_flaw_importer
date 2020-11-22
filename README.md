@@ -45,4 +45,3 @@ The Veracode credentials are read from github secrets. NEVER STORE YOUR SECRETS 
         app_name: 'Verademo'
         sandbox_name: 'Feature ABC'
 ```
-
