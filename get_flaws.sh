@@ -236,18 +236,16 @@ while [  $i -lt $findingsnumber ]; do
           echo "
           ," >> rules.json
           echo "," >> results.json
-        else
-          if [ $i -eq $second_last]
+        elif [ $i -eq $second_last ]
+        then
+          echo "$i - $number - $second_last - second last"
+          open_last=$(cat findings.json | /jq-linux64 ._embedded.findings[$number].finding_status.status | sed 's/"//g')
+          if [[ "$open_last" == "OPEN" || "$open_last" == "REOPENED" ]]
           then
-            echo "$i - $number - $second_last - second last"
-            open_last=$(cat findings.json | /jq-linux64 ._embedded.findings[$number].finding_status.status | sed 's/"//g')
-            if [[ "$open_last" == "OPEN" || "$open_last" == "REOPENED" ]]
-            then
-              echo "Last finding is open we need to add a ,"
-              echo "
-              ," >> rules.json
-              echo "," >> results.json
-            fi
+            echo "Last finding is open we need to add a ,"
+            echo "
+            ," >> rules.json
+            echo "," >> results.json
           fi
         fi
           
