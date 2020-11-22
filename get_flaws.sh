@@ -12,6 +12,8 @@ sandboxguid=$4
 scantype=$4
 includeannotations=$5
 
+#inital tasks
+chmod 777 /jq-linux64
 
 if [ -z $appguid ]
 then
@@ -22,7 +24,7 @@ then
   else
     echo "Searching app: \"$appname_raw\""
     $(echo "http --auth-type veracode_hmac --output apps.json GET https://api.veracode.com/appsec/v1/applications?name=$appname")
-    appsnumber=$(cat apps.json | /jq-linux64  -r '._embedded.applications' | ./jq length)
+    appsnumber=$(cat apps.json | /jq-linux64  -r '._embedded.applications' | /jq-linux64 length)
     echo "$appsnumber apps found"
     j=0
     while [  $j -lt $appsnumber ]; do
@@ -56,7 +58,7 @@ else
   then
     echo "Searching sandbox: \"$sandboxname_raw\""
     $(echo "http --auth-type veracode_hmac --output sandboxes.json GET https://api.veracode.com/appsec/v1/applications/$appguid/sandboxes")
-    sandboxnumber=$(cat sandboxes.json | /jq-linux64  -r '._embedded.sandboxes' | ./jq length)
+    sandboxnumber=$(cat sandboxes.json | /jq-linux64  -r '._embedded.sandboxes' | /jq-linux64 length)
     echo "$sandboxnumber sandboxes found"
     k=0
     while [  $k -lt $sandboxnumber ]; do
