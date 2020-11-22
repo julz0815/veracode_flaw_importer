@@ -262,7 +262,7 @@ done
 #create full file
 cat sarif.json > fullResults.json
 cat rules.json >> fullResults.json
-echo "      \"results\": [" >> fullResults.json
+echo "      \"]results\": [" >> fullResults.json
 cat results.json >> fullResults.json
 #close runs tag
 echo "
