@@ -233,7 +233,7 @@ while [  $i -lt $findingsnumber ]; do
         }" >> results.json
           
         #if more rules/results, add a ","
-        if [  $i -lt $findingsnumber ]
+        if [  $i -lt $number ]
         then
           echo "$number - $i - one more"
           echo "
