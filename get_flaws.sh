@@ -188,6 +188,9 @@ while [  $i -lt $findingsnumber ]; do
             then
                 echo "
                 ," >> rules.json
+            else
+                echo "
+                ]," >> rules.json            
             fi
 
             #Add results
@@ -244,6 +247,8 @@ while [  $i -lt $findingsnumber ]; do
             if [  $i -lt $findingsnumber ]
             then
                 echo "," >> results.json
+            else
+                echo "]," >> results.json
             fi
             
     else
@@ -257,8 +262,7 @@ done
 #create full file
 cat sarif.json > fullResults.json
 cat rules.json >> fullResults.json
-echo "                  ]
-          \"results\": [" >> fullResults.json
+echo "    \"results\": [" >> fullResults.json
 cat results.json >> fullResults.json
 #close runs tag
 echo "
