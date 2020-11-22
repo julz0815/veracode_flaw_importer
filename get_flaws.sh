@@ -22,16 +22,16 @@ then
   else
     echo "Searching app: \"$appname_raw\""
     $(echo "http --auth-type veracode_hmac --output apps.json GET https://api.veracode.com/appsec/v1/applications?name=$appname")
-    appsnumber=$(cat apps.json | ./jq  -r '._embedded.applications' | ./jq length)
+    appsnumber=$(cat apps.json | /jq-linux64  -r '._embedded.applications' | ./jq length)
     echo "$appsnumber apps found"
     j=0
     while [  $j -lt $appsnumber ]; do
       let $appsnumber-1
-      appfindingsname=$(cat apps.json | ./jq ._embedded.applications[$j].profile.name | sed 's/"//g')
+      appfindingsname=$(cat apps.json | /jq-linux64 ._embedded.applications[$j].profile.name | sed 's/"//g')
       echo "app $j: $appfindingsname"
       if [ "$appname_raw" = "$appfindingsname" ]
       then
-        appguid=$(cat apps.json | ./jq ._embedded.applications[$j].guid | sed 's/"//g')
+        appguid=$(cat apps.json | /jq-linux64 ._embedded.applications[$j].guid | sed 's/"//g')
         echo "App $appname_raw found: 
   - App GUID: $appguid"
       fi
@@ -56,16 +56,16 @@ else
   then
     echo "Searching sandbox: \"$sandboxname_raw\""
     $(echo "http --auth-type veracode_hmac --output sandboxes.json GET https://api.veracode.com/appsec/v1/applications/$appguid/sandboxes")
-    sandboxnumber=$(cat sandboxes.json | ./jq  -r '._embedded.sandboxes' | ./jq length)
+    sandboxnumber=$(cat sandboxes.json | /jq-linux64  -r '._embedded.sandboxes' | ./jq length)
     echo "$sandboxnumber sandboxes found"
     k=0
     while [  $k -lt $sandboxnumber ]; do
       let $sandboxnumber-1
-      sandboxfindingsname=$(cat sandboxes.json | ./jq ._embedded.sandboxes[$k].name | sed 's/"//g')
+      sandboxfindingsname=$(cat sandboxes.json | /jq-linux64 ._embedded.sandboxes[$k].name | sed 's/"//g')
       echo "sandbox $k: $sandboxfindingsname"
       if [ "$sandboxname_raw" = "$sandboxfindingsname" ]
       then
-        sandboxguid=$(cat sandboxes.json | ./jq ._embedded.sandboxes[$k].guid | sed 's/"//g')
+        sandboxguid=$(cat sandboxes.json | /jq-linux64 ._embedded.sandboxes[$k].guid | sed 's/"//g')
         echo "Sandbox $sandboxname_raw found: 
   - Sandbox GUID: $sandboxguid"
       fi
@@ -91,7 +91,7 @@ then
 else
   $(echo "http --auth-type veracode_hmac --output findings.json GET https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500&scantype=STATIC&context=$sandboxguid")
 fi
-findingsnumber=$(cat findings.json | ./jq  -r '._embedded.findings' | ./jq length)
+findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | ./jq length)
 echo "Found: $findingsnumber findings"
 
 
