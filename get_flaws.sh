@@ -1,34 +1,100 @@
-#!/bin/sh -l
-
 #required parameters
-appguid=$1
-
+appname=$(echo "$1" | sed -e 's/%/%25/g' -e 's/ /%20/g' -e 's/!/%21/g' -e 's/"/%22/g' -e 's/#/%23/g' -e 's/\$/%24/g' -e 's/\&/%26/g' -e 's/'\''/%27/g' -e 's/(/%28/g' -e 's/)/%29/g' -e 's/\*/%2a/g' -e 's/+/%2b/g' -e 's/,/%2c/g' -e 's/-/%2d/g' -e 's/\./%2e/g' -e 's/\//%2f/g' -e 's/:/%3a/g' -e 's/;/%3b/g' -e 's//%3e/g' -e 's/?/%3f/g' -e 's/@/%40/g' -e 's/\[/%5b/g' -e 's/\\/%5c/g' -e 's/\]/%5d/g' -e 's/\^/%5e/g' -e 's/_/%5f/g' -e 's/`/%60/g' -e 's/{/%7b/g' -e 's/|/%7c/g' -e 's/}/%7d/g' -e 's/~/%7e/g')
+appname_raw=$1
+appguid=$2
+sandboxname=$(echo "$3" | sed -e 's/%/%25/g' -e 's/ /%20/g' -e 's/!/%21/g' -e 's/"/%22/g' -e 's/#/%23/g' -e 's/\$/%24/g' -e 's/\&/%26/g' -e 's/'\''/%27/g' -e 's/(/%28/g' -e 's/)/%29/g' -e 's/\*/%2a/g' -e 's/+/%2b/g' -e 's/,/%2c/g' -e 's/-/%2d/g' -e 's/\./%2e/g' -e 's/\//%2f/g' -e 's/:/%3a/g' -e 's/;/%3b/g' -e 's//%3e/g' -e 's/?/%3f/g' -e 's/@/%40/g' -e 's/\[/%5b/g' -e 's/\\/%5c/g' -e 's/\]/%5d/g' -e 's/\^/%5e/g' -e 's/_/%5f/g' -e 's/`/%60/g' -e 's/{/%7b/g' -e 's/|/%7c/g' -e 's/}/%7d/g' -e 's/~/%7e/g')
+sandboxname_raw=$3
+sandboxguid=$4
 
 #optional parameters
-scantype=$2 ## default is STATIC, nothing else yet implemented
-importtype=$3
-includeannotations=$4
-sandboxguid=$5
-
-#inital tasks
-chmod 777 /jq-linux64
+scantype=$4
+includeannotations=$5
 
 
-#
-# scantype ( STATIC || MANUAL || DYNAMIC || SCA )
-# importtype (cwe || scantype || sandbox || severity || severityhigher || category || latestscan || violates_policy)
-# optional ( includeannotations ) 
-#
-# context=<sandbox-guid>"
-#
+if [ -z $appguid ]
+then
+  if [ -z $appname ]
+  then
+    echo "ERRO: either app-name or app-guid need to be set"
+    exit 1
+  else
+    echo "Searching app: \"$appname_raw\""
+    $(echo "http --auth-type veracode_hmac --output apps.json GET https://api.veracode.com/appsec/v1/applications?name=$appname")
+    appsnumber=$(cat apps.json | ./jq  -r '._embedded.applications' | ./jq length)
+    echo "$appsnumber apps found"
+    j=0
+    while [  $j -lt $appsnumber ]; do
+      let $appsnumber-1
+      appfindingsname=$(cat apps.json | ./jq ._embedded.applications[$j].profile.name | sed 's/"//g')
+      echo "app $j: $appfindingsname"
+      if [ "$appname_raw" = "$appfindingsname" ]
+      then
+        appguid=$(cat apps.json | ./jq ._embedded.applications[$j].guid | sed 's/"//g')
+        echo "App $appname_raw found: 
+  - App GUID: $appguid"
+      fi
+      let j=j+1 
+    done
+    if [ -z $appguid ]
+    then
+      echo "ERROR: no app guid found!"
+      exit 1
+    fi
+  fi
+fi
 
-$(echo "http --auth-type veracode_hmac --output findings.json GET https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500&scantype=STATIC")
-findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq-linux64 length)
-echo "Number of findings found: $findingsnumber"
+echo "
+"
+
+if [ -z $sandboxguid ] && [ -z $sandboxname ]
+then
+  echo "Not a sandbox scan"
+else
+  if [ -z $sandboxguid ]
+  then
+    echo "Searching sandbox: \"$sandboxname_raw\""
+    $(echo "http --auth-type veracode_hmac --output sandboxes.json GET https://api.veracode.com/appsec/v1/applications/$appguid/sandboxes")
+    sandboxnumber=$(cat sandboxes.json | ./jq  -r '._embedded.sandboxes' | ./jq length)
+    echo "$sandboxnumber sandboxes found"
+    k=0
+    while [  $k -lt $sandboxnumber ]; do
+      let $sandboxnumber-1
+      sandboxfindingsname=$(cat sandboxes.json | ./jq ._embedded.sandboxes[$k].name | sed 's/"//g')
+      echo "sandbox $k: $sandboxfindingsname"
+      if [ "$sandboxname_raw" = "$sandboxfindingsname" ]
+      then
+        sandboxguid=$(cat sandboxes.json | ./jq ._embedded.sandboxes[$k].guid | sed 's/"//g')
+        echo "Sandbox $sandboxname_raw found: 
+  - Sandbox GUID: $sandboxguid"
+      fi
+      let k=k+1 
+    done
+    if [ -z $sandboxguid ]
+    then
+      echo "ERROR: no sandbox guid found!"
+      exit 1
+    else
+      sandboxguid=$sandboxguid
+    fi
+  fi
+fi
+
+echo "
+Get static flaws
+"
+
+if [ -z $sandboxguid ]
+then
+  $(echo "http --auth-type veracode_hmac --output findings.json GET https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500&scantype=STATIC")
+else
+  $(echo "http --auth-type veracode_hmac --output findings.json GET https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500&scantype=STATIC&context=$sandboxguid")
+fi
+findingsnumber=$(cat findings.json | ./jq  -r '._embedded.findings' | ./jq length)
+echo "Found: $findingsnumber findings"
 
 
 
-  #Start construct SARIF
+#Start construct SARIF
 echo "
 {
 \"\$schema\" : \"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json\",
