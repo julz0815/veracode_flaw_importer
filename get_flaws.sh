@@ -114,10 +114,6 @@ echo "
 
 i=0
 while [  $i -lt $findingsnumber ]; do
-            #echo "Finding #$i"
-            #echo $(cat findings.json | /jq-linux64 ._embedded.findings[$i])
-            #echo "\\n\\n"
-            #use findingsnumber internaly
             let number=$findingsnumber-1
             open=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_status.status | sed 's/"//g')
             
@@ -233,12 +229,21 @@ while [  $i -lt $findingsnumber ]; do
         }" >> results.json
           
         #if more rules/results, add a ","
-        if [  $i -lt $number ]
+        if [  $i -lt $number-1 ]
         then
           echo "$number - $i - one more"
           echo "
           ," >> rules.json
           echo "," >> results.json
+        else
+          open_last=$(cat findings.json | /jq-linux64 ._embedded.findings[$number].finding_status.status | sed 's/"//g')
+          if [[ "$open_last" == "OPEN" || "$open_last" == "REOPENED" ]]
+          then
+            echo "$number - $i - one more"
+            echo "
+            ," >> rules.json
+            echo "," >> results.json
+          fi
         fi
           
     else
