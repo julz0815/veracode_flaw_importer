@@ -93,7 +93,7 @@ then
 else
   $(echo "http --auth-type veracode_hmac --output findings.json GET https://api.veracode.com/appsec/v2/applications/$appguid/findings/?violates_policy=true&size=500&scantype=STATIC&context=$sandboxguid")
 fi
-findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | ./jq length)
+findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq-linux64 length)
 echo "Found: $findingsnumber findings"
 
 
