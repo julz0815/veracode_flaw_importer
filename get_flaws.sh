@@ -274,7 +274,8 @@ echo "    \"results\": [" >> fullResults.json
 cat results.json >> fullResults.json
 #close runs tag
 echo "
-      ]
+        }
+      }
     }
   ]
 }" >> fullResults.json
