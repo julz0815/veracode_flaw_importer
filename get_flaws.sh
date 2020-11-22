@@ -232,7 +232,6 @@ while [  $i -lt $findingsnumber ]; do
         let second_last=$number-1
         if [  $i -lt $second_last ]
         then
-          echo "$number - $i - one more"
           echo "
           ," >> rules.json
           echo "," >> results.json
@@ -240,7 +239,6 @@ while [  $i -lt $findingsnumber ]; do
           open_last=$(cat findings.json | /jq-linux64 ._embedded.findings[$number].finding_status.status | sed 's/"//g')
           if [[ "$open_last" == "OPEN" || "$open_last" == "REOPENED" ]]
           then
-            echo "$number - $i - one more"
             echo "
             ," >> rules.json
             echo "," >> results.json
@@ -255,7 +253,6 @@ while [  $i -lt $findingsnumber ]; do
     echo "run $i - $findingsnumber - $number"
     if [  $i -eq $number ]
     then
-      echo "$number - $i - NO more"
       echo "
           ]
         }
