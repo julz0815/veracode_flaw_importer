@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM ctcampbelldocker/veracode-ci-examples
+FROM ctcampbellcom/veracode-tools
     
 #RUN yum install httpie
 
