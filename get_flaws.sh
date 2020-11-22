@@ -232,7 +232,7 @@ while [  $i -lt $findingsnumber ]; do
         let second_last=$number-1
         if [  $i -le $second_last ]
         then
-          echo "$i - $number - not the last"
+          echo "$i - $number - $second_last - not the last"
           echo "
           ," >> rules.json
           echo "," >> results.json
