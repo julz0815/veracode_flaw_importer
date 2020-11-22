@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM ctcampbellcom/veracode-tools
+FROM veracode/api-signing
     
 #RUN yum install httpie
 
