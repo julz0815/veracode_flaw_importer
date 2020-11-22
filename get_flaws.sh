@@ -232,17 +232,14 @@ while [  $i -lt $findingsnumber ]; do
         let second_last=$number-1
         if [  $i -lt $second_last ]
         then
-          echo "$i - $number - $second_last - not the last"
           echo "
           ," >> rules.json
           echo "," >> results.json
         elif [ $i -eq $second_last ]
         then
-          echo "$i - $number - $second_last - second last"
           open_last=$(cat findings.json | /jq-linux64 ._embedded.findings[$number].finding_status.status | sed 's/"//g')
           if [[ "$open_last" == "OPEN" || "$open_last" == "REOPENED" ]]
           then
-            echo "Last finding is open we need to add a ,"
             echo "
             ," >> rules.json
             echo "," >> results.json
@@ -256,7 +253,6 @@ while [  $i -lt $findingsnumber ]; do
     #if no more rules/results, close tag
     if [  $i -eq $number ]
     then
-      echo "closing tags" 
       echo "
           ]
         }
@@ -282,4 +278,4 @@ echo "
   ]
 }" >> fullResults.json
 
-cat fullResults.json
+#cat fullResults.json
