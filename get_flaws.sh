@@ -190,6 +190,7 @@ while [  $i -lt $findingsnumber ]; do
                 echo "
                 ," >> rules.json
             elif [ $i -eq $number ]
+            then
                 echo "$number - $i - NO more rule"
                 echo "
                 ]," >> rules.json            
@@ -246,11 +247,13 @@ while [  $i -lt $findingsnumber ]; do
         }" >> results.json
             
             #if more results add ,
-            elif [ $i -eq $number ]
+            if [ $i -lt $number ]
             then
                 echo "$number - $i - one more results"
                 echo "," >> results.json
-            else
+            elif [ $i -eq $number ]
+            then
+                echo "$number - $i - NO more results"
                 echo "]," >> results.json
             fi
             
