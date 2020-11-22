@@ -44,4 +44,14 @@ The Veracode credentials are read from github secrets. NEVER STORE YOUR SECRETS 
       with:
         app_name: 'Verademo'
         sandbox_name: 'Feature ABC'
+    - uses: actions/upload-artifact@master
+      if: ${{ failure() }}
+      with:
+        name: flaws
+        path: /home/runner/work/veracode_flaw_importer/veracode_flaw_importer/fullResults.json
+    - uses: github/codeql-action/upload-sarif@v1
+      if: ${{ failure() }}
+      with:
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: fullResults.json
 ```
