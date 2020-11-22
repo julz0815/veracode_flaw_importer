@@ -31,7 +31,8 @@ jobs:
         VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
       id: get_flaws  
       with:
-        guid: 'a61bdc6c-f075-4041-a2c3-c707b753606b'
+        app_name: 'Verademo'
+        sandbox_name: 'Github - feature'
     - uses: actions/upload-artifact@master
       with:
         name: flaws

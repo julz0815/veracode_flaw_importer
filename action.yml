@@ -21,7 +21,6 @@ inputs:
     description: 'Include annotations'
     required: false
   
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
