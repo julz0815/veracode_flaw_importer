@@ -258,7 +258,7 @@ while [  $i -lt $findingsnumber ]; do
       echo "$number - $i - NO more"
       echo "
       ]," >> rules.json
-      echo "]," >> results.json
+      echo "]" >> results.json
     fi
     
     
