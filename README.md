@@ -18,8 +18,12 @@ Import Veracode static analysis findings to Github Security "Code Scanning Alert
 
 # Description
 The Veracode Flaw Importer will only import static analysis findings of the last scan with the provided information. Either from a policy scan or from a sandbox scan.
+
 Please be aware that the scan first has to finish before the results can be imported
-If you are using this flaw importer with in you pipeline, make sure the previous task, most probably the Veracode action **uploadandscan**, is using the **scantimeout** option to wait for the scan to finish before you import the flaws.
+
+### In Pipeline usage
+If you are using this flaw importer within your pipeline, make sure the previous task, most probably the Veracode action **uploadandscan**, is using the **scantimeout** option to wait for the scan to finish before you import the flaws.
+As well keep in mind that a scan with flaws found and rated by policy will fail your step if **scantimeout** is set. In order to run the next step and import the findings please add **if: ${{ failure() }}** to your **Import Flaws** step
 
 ## Example usage
 
@@ -31,6 +35,7 @@ The Veracode credentials are read from github secrets. NEVER STORE YOUR SECRETS 
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Getflaws
+      if: ${{ failure() }}
       uses: ./ # Uses an action in the root directory
       env: 
         VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
