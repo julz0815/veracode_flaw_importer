@@ -4,11 +4,11 @@ Import Veracode static analysis findings to Github Security "Code Scanning Alert
 # Required paraeters
 ### `app_name`
 **Required:** The name of the application
-# OR
+### OR
 ### `app_guid`
 **Required:** The GUID of the application, can be found via API calls
 
-**EITHER THE app_name OR THE app_guid PARAMETER NEED TO BE PROVIDED
+**EITHER THE app_name OR THE app_guid PARAMETER NEED TO BE PROVIDED**
 
 # Optional paraeters
 ### `sandbox_name`
