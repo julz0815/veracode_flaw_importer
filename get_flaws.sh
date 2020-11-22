@@ -184,7 +184,7 @@ while [  $i -lt $findingsnumber ]; do
 
 
             #if more rules add ,
-            if [  $i -lt $number ]
+            if [  $i -lt $findingsnumber ]
             then
                 echo "
                 ," >> rules.json
@@ -241,7 +241,7 @@ while [  $i -lt $findingsnumber ]; do
         }" >> results.json
             
             #if more results add ,
-            if [  $i -lt $number ]
+            if [  $i -lt $findingsnumber ]
             then
                 echo "," >> results.json
             fi
