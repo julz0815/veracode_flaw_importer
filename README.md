@@ -1,7 +1,7 @@
 # veracode_flaw_importer
 Import Veracode static analysis findings to Github Security "Code Scanning Alerts"
 
-# Required paraeters
+# Required paramters
 ### `app_name`
 **Required:** The name of the application
 ### OR
@@ -10,7 +10,7 @@ Import Veracode static analysis findings to Github Security "Code Scanning Alert
 
 **EITHER THE app_name OR THE app_guid PARAMETER NEED TO BE PROVIDED**
 
-# Optional paraeters
+# Optional paramters
 ### `sandbox_name`
 **Optional:** The name of the sandbox
 ### `sandbox_guid`
