@@ -157,7 +157,7 @@ while [  $i -lt $findingsnumber ]; do
             pwd=$(pwd)
             echo "Folder: $pwd"
             full_path=$(find / -name $filename)
-            echo "Full Path: $full_path)
+            echo "Full Path: $full_path"
             source_suffix=$(echo "$full_path" | sed 's/$pwd//g' | sed 's/$filepath//g')
             echo "Source Suffix: $source_suffix"
 
