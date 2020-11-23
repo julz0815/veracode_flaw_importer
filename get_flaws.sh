@@ -154,7 +154,8 @@ while [  $i -lt $findingsnumber ]; do
             
             
             echo "File Name: $filename"
-            echo "Folder: " pwd
+            pwd=$(pwd)
+            echo "Folder: $pwd"
             find ~ -name $filename
 
             echo "
