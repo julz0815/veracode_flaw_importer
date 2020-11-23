@@ -153,7 +153,7 @@ while [  $i -lt $findingsnumber ]; do
             procedure=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
             lineofcode=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_line_number| sed 's/"//g')
             
-            find ~ -name $file_name
+            find ~ -name $filename
 
             echo "
                     {
