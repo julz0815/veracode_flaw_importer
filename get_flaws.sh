@@ -160,7 +160,7 @@ while [  $i -lt $findingsnumber ]; do
             echo "Full Path: $full_path"
             no_prefix=$(echo "$full_path" | grep -oP "^$pwd\K.*")
             echo "No Prefix: $no_prefix"
-            no_suffix=$(echo "$no_prefix" | grep -oP "^$filepath\K.*")
+            no_suffix=$(echo "$no_prefix" | grep -oP ".*$filepath")
             echo "No Suffix: $no_suffix"
             #source_suffix=$(echo $full_path | sed -e "s/^$pwd//" -e "s/$filepath$//")
             #echo "Source Suffix $source_suffix"
