@@ -55,3 +55,12 @@ The Veracode credentials are read from github secrets. NEVER STORE YOUR SECRETS 
         # Path to SARIF file relative to the root of the repository
         sarif_file: fullResults.json
 ```
+Make sure you replace the repository name on the uplaod artifact step from 
+```
+path: /home/runner/work/veracode_flaw_importer/veracode_flaw_importer/fullResults.json
+````
+to
+```
+path: /home/runner/work/YOUR_REPO_NAME/YOUR_REPO_NAME/fullResults.json
+```
+
