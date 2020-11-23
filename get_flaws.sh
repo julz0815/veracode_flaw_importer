@@ -153,19 +153,15 @@ while [  $i -lt $findingsnumber ]; do
             lineofcode=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_line_number| sed 's/"//g')
             
             
-            echo "File Name: $filename"
+            #echo "File Name: $filename"
             pwd=$(pwd)
-            echo "Folder: $pwd"
+            #echo "Folder: $pwd"
             full_path=$(find / -name $filename)
-            echo "Full Path: $full_path"
+            #echo "Full Path: $full_path"
             no_prefix=${full_path#$pwd}
-            #no_prefix=$(echo "$full_path" | grep -oP "^$pwd\K.*")
-            echo "No Prefix: $no_prefix"
+            #echo "No Prefix: $no_prefix"
             no_suffix=${no_prefix%$filepath}
-            #no_suffix=$(echo "$no_prefix" | grep -oP ".*$filepath\K")
-            echo "No Suffix: $no_suffix"
-            #source_suffix=$(echo $full_path | sed -e "s/^$pwd//" -e "s/$filepath$//")
-            #echo "Source Suffix $source_suffix"
+            #echo "No Suffix: $no_suffix"
 
             echo "
                     {
