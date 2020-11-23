@@ -156,6 +156,7 @@ while [  $i -lt $findingsnumber ]; do
             echo "File Name: $filename"
             pwd=$(pwd)
             echo "Folder: $pwd"
+            ls -la
             find ~ -name $filename
 
             echo "
