@@ -148,9 +148,12 @@ while [  $i -lt $findingsnumber ]; do
             description=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].description| sed 's/"//g' | sed -e 's/<[^>]*>//g' | sed 's/\\//g')
             severity=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.severity| sed 's/"//g')
             filepath=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_path| sed 's/"//g')
+            filename=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_name| sed 's/"//g')
             modulename=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.module| sed 's/"//g')
             procedure=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
             lineofcode=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_line_number| sed 's/"//g')
+            
+            find ~ -name $file_name
 
             echo "
                     {
