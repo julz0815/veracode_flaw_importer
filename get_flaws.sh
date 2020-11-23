@@ -232,7 +232,7 @@ while [  $i -lt $findingsnumber ]; do
             {
               \"physicalLocation\": {
                 \"artifactLocation\": {
-                  \"uri\": \"$filepath\",
+                  \"uri\": \"$no_suffix$filepath\",
                   \"uriBaseId\": \"%SRCROOT%\"
                 },
                 \"region\": {
