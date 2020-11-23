@@ -96,7 +96,7 @@ fi
 findingsnumber=$(cat findings.json | /jq-linux64  -r '._embedded.findings' | /jq-linux64 length)
 echo "Found: $findingsnumber findings"
 
-
+ls -laR
 
 #Start construct SARIF
 echo "
@@ -152,6 +152,7 @@ while [  $i -lt $findingsnumber ]; do
             modulename=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.module| sed 's/"//g')
             procedure=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
             lineofcode=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_line_number| sed 's/"//g')
+            
             
             echo "File Name: $filename"
             find ~ -name $filename
