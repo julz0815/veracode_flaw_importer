@@ -156,7 +156,7 @@ while [  $i -lt $findingsnumber ]; do
             echo "File Name: $filename"
             pwd=$(pwd)
             echo "Folder: $pwd"
-            full_path=$(find / -name $filename)
+            full_path=$(find / -name $filename -print | head -n 1)
             echo "Full Path: $full_path"
             echo "File path: $filepath"
             no_prefix=${full_path#$pwd}
