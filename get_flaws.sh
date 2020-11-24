@@ -162,6 +162,7 @@ while [  $i -lt $findingsnumber ]; do
             no_prefix=${full_path#$pwd}
             echo "No Prefix: $no_prefix"
             no_suffix=${no_prefix%$filepath}
+            no_suffix=$(echo $no_suffix |sed 's@/@@')
             echo "No Suffix: $no_suffix"
 
             echo "
