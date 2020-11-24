@@ -229,8 +229,8 @@ while [  $i -lt $findingsnumber ]; do
             {
               \"physicalLocation\": {
                 \"artifactLocation\": {
-                  \"uri\": \"$no_suffix$filepath\",
-                  \"uriBaseId\": \"%SRCROOT%\"
+                  \"uri\": \"$no_suffix$filepath\"
+#                  \"uriBaseId\": \"%SRCROOT%\"
                 },
                 \"region\": {
                   \"startLine\": $lineofcode
