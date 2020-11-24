@@ -152,18 +152,12 @@ while [  $i -lt $findingsnumber ]; do
             procedure=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.procedure| sed 's/"//g')
             lineofcode=$(cat findings.json | /jq-linux64 ._embedded.findings[$i].finding_details.file_line_number| sed 's/"//g')
             
-            
-            echo "File Name: $filename"
+            #Find the file on the repo and creat the suffix
             pwd=$(pwd)
-            echo "Folder: $pwd"
             full_path=$(find / -name $filename -print | head -n 1)
-            echo "Full Path: $full_path"
-            echo "File path: $filepath"
             no_prefix=${full_path#$pwd}
-            echo "No Prefix: $no_prefix"
             no_suffix=${no_prefix%$filepath}
             no_suffix=$(echo $no_suffix |sed 's@/@@')
-            echo "No Suffix: $no_suffix"
 
             echo "
                     {
