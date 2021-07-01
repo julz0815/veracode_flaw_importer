@@ -31,8 +31,8 @@ jobs:
         VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
       id: get_flaws  
       with:
-        app_name: 'Verademo'
-        sandbox_name: 'Github - feature'
+        app_name: 'Verademo AzureDevops'
+        sandbox_name: 'Feature-1234'
     - uses: actions/upload-artifact@master
       with:
         name: flaws
