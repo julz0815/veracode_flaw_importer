@@ -1,4 +1,4 @@
-# veracode_flaw_importer
+# veracode_flaw_importer 
 Import Veracode static analysis findings to Github Security "Code Scanning Alerts"
 
 # Required paramters
