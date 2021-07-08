@@ -33,10 +33,14 @@ The Veracode credentials are read from github secrets. NEVER STORE YOUR SECRETS 
 
 ```yaml
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    # *** NOTE: This step is COMPULSORY, as the script requires the source file to determine the
+    #           filepath prefix in order for the code could be successfully loaded for preview 
     - uses: actions/checkout@v2
     - name: Getflaws
       if: ${{ failure() }}
-      uses: ./ # Uses an action in the root directory
+      uses: ./ 
+      # Uses an action in the root directory. If you are using this action in your own workflow, 
+      # make sure you replace this with action reference, for e.g. julz0815/veracode_flaw_importer@main
       env: 
         VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
         VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
